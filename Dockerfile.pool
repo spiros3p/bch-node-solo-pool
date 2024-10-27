@@ -23,4 +23,4 @@ COPY asicseer-pool.conf /usr/src/${REPO}/build/src/asicseer-pool.conf
 
 WORKDIR /usr/src/${REPO}/build/src
 
-CMD ["/usr/src/asicseer-pool/build/src/asicseer-pool", "--solo"]
+ENTRYPOINT ["/usr/src/asicseer-pool/build/src/asicseer-pool", "--solo"]
