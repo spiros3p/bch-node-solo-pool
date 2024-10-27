@@ -13,6 +13,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.pool
+    restart: unless-stopped
     depends_on:
       - bch-node
     ports:
