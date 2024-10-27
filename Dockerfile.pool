@@ -1,0 +1,26 @@
+FROM ubuntu:latest
+
+ARG REPO=asicseer-pool
+ARG REPO_URL=https://github.com/cculianu/asicseer-pool.git 
+
+WORKDIR /usr/src
+
+RUN apt update && apt upgrade -y
+RUN apt install build-essential libzmq3-dev cmake git -y
+
+RUN git clone ${REPO_URL}
+
+WORKDIR /usr/src/${REPO}
+
+RUN mkdir build
+
+WORKDIR /usr/src/${REPO}/build
+
+RUN cmake ..
+RUN make
+
+COPY asicseer-pool.conf /usr/src/${REPO}/build/src/asicseer-pool.conf
+
+WORKDIR /usr/src/${REPO}/build/src
+
+CMD ["/usr/src/asicseer-pool/build/src/asicseer-pool", "--solo"]

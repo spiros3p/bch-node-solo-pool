@@ -1,0 +1,28 @@
+services:
+  bch-node:
+    image: zquestz/bitcoin-cash-node:latest
+    restart: unless-stopped
+    volumes:
+      - ./data:/data
+      - ./bitcoin.conf:/data/bitcoin.conf
+    networks:
+      bch_network:
+        ipv4_address: 172.20.0.10
+
+  bch-pool:
+    build:
+      context: .
+      dockerfile: Dockerfile.pool
+    depends_on:
+      - bch-node
+    ports:
+      - "3333:3333"
+    networks:
+      bch_network:
+        ipv4_address: 172.20.0.2
+
+networks:
+  bch_network:
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
