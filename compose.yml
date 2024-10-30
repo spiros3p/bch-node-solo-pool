@@ -18,6 +18,8 @@ services:
       - bch-node
     ports:
       - "3333:3333"
+    volumes:
+      - ./pool-logs:/usr/src/asicseer-pool/build/src/logs
     networks:
       bch_network:
         ipv4_address: 172.20.0.2
