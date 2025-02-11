@@ -24,6 +24,16 @@ services:
       bch_network:
         ipv4_address: 172.20.0.2
 
+  bch-pool-server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "8091:8091"
+    volumes:
+      - ./pool-logs:/app/pool-logs
+
 networks:
   bch_network:
     ipam:
